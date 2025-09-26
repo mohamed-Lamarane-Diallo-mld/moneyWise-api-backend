@@ -22,6 +22,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|in:income,expense',
+            'user_id' => 'required|exists:users,id',
         ]);
 
         $category = Auth::user()->categories()->create($request->all());
