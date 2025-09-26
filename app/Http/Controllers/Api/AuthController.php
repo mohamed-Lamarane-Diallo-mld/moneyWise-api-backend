@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Utilisateur;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -26,15 +26,13 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'fullname' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
+            'name' => 'required|string|max:255|unique:users',
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
 
         $user = User::create([
-            'fullname' => $request->fullname,
-            'username' => $request->username,
+            'name' => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
         ]);

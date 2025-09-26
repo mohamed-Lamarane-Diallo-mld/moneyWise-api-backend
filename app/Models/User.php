@@ -42,4 +42,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Relation : un utilisateur peut avoir plusieurs catégories
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    // Implémentation JWT
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims() {
+        return [];
+    }
 }
