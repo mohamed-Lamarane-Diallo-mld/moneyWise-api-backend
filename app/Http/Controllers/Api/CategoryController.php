@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\category;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +31,7 @@ class CategoryController extends Controller
     }
 
     // PUT /api/categories/{id}
-    public function update(Request $request, category $category)
+    public function update(Request $request, Category $category)
     {
         if ($category->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
@@ -43,7 +43,7 @@ class CategoryController extends Controller
     }
 
     // DELETE /api/categories/{id}
-    public function destroy(category $category)
+    public function destroy(Category $category)
     {
         if ($category->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
