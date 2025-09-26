@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 
 
 class CategoryController extends Controller
@@ -13,7 +13,7 @@ class CategoryController extends Controller
     // GET /api/categories
     public function index()
     {
-        return JWTAuth::user()->categories()->get();
+        return Auth::user()->categories()->get();
     }
 
     // POST /api/categories
@@ -24,15 +24,15 @@ class CategoryController extends Controller
             'type' => 'required|in:income,expense',
         ]);
 
-        $category = JWTAuth::user()->categories()->create($request->all());
+        $category = Auth::user()->categories()->create($request->all());
 
         return response()->json($category, 201);
     }
 
     // PUT /api/categories/{id}
-    public function update(Request $request, Category $category)
+    public function update(Request $request, category $category)
     {
-        if ($category->user_id !== JWTAuth::id()) {
+        if ($category->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
 
@@ -42,9 +42,9 @@ class CategoryController extends Controller
     }
 
     // DELETE /api/categories/{id}
-    public function destroy(Category $category)
+    public function destroy(category $category)
     {
-        if ($category->user_id !== JWTAuth::id()) {
+        if ($category->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
 

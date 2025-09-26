@@ -5,14 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Auth;
+
 
 class StatsController extends Controller
 {
     // Dépenses par catégorie
     public function categories()
     {
-        $userId = JWTAuth::id();
+        $userId = Auth::id();
         $stats = Transaction::where('user_id', $userId)
             ->select('category_id')
             ->selectRaw('SUM(amount) as total')
@@ -26,7 +27,7 @@ class StatsController extends Controller
     // Revenus/dépenses par mois
     public function monthly()
     {
-        $userId = JWTAuth::id();
+        $userId = Auth::id();
         $stats = Transaction::where('user_id', $userId)
             ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(amount) as total')
             ->groupBy('year', 'month')

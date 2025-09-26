@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 
 
 class TransactionController extends Controller
@@ -13,7 +13,7 @@ class TransactionController extends Controller
     // GET /api/transactions
     public function index()
     {
-        return JWTAuth::user()
+        return Auth::user()
             ->transactions()
             ->with('category')
             ->orderBy('date', 'desc')
@@ -31,7 +31,7 @@ class TransactionController extends Controller
             'category_id' => 'nullable|exists:categories,id',
         ]);
 
-        $transaction = JWTAuth::user()->transactions()->create($request->all());
+        $transaction = Auth::user()->transactions()->create($request->all());
 
         return response()->json($transaction, 201);
     }
@@ -39,7 +39,7 @@ class TransactionController extends Controller
     // PUT /api/transactions/{id}
     public function update(Request $request, Transaction $transaction)
     {
-        if ($transaction->user_id !== JWTAuth::id()) {
+        if ($transaction->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
 
@@ -51,7 +51,7 @@ class TransactionController extends Controller
     // DELETE /api/transactions/{id}
     public function destroy(Transaction $transaction) 
     {
-        if ($transaction->user_id !== JWTAuth::id()) {
+        if ($transaction->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
 
