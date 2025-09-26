@@ -17,7 +17,10 @@ class UtilisateurFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'fullname' => $this->faker->name(),
+            'username' => $this->faker->unique()->userName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'password' => Hash::make('password'),
         ];
     }
 }
