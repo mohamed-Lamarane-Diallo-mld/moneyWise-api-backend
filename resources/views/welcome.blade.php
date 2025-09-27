@@ -98,6 +98,7 @@
 </style>
 </head>
 <body>
+    @csrf
 <header>
     <h1>MoneyWise API</h1>
     <p>Gestion de portefeuilles et suivi des transactions personnelles</p>
