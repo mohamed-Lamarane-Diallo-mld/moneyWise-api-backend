@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\StatsController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+// Route d'accueil de l'API avec documentation des endpoints
 Route::any('/', function () {
     return response()->json([
         'success' => true,
