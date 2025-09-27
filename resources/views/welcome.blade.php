@@ -18,6 +18,7 @@
         padding: 80px 20px;
         text-align: center;
         clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        margin-bottom: 100px;
     }
     header h1 {
         margin: 0;
@@ -244,16 +245,53 @@
         <span class="method method-GET">GET</span> <code>/api/stats/categories</code>
         <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/stats/categories')">Copier</button>
         <div class="response"><pre>{
-  "Loisir": 150,
-  "Transport": 30
-}</pre></div>
+                "Loisir": 150,
+                "Transport": 30
+                }</pre></div>
+                    </div>
+                    <div class="route">
+                        <span class="method method-GET">GET</span> <code>/api/stats/monthly</code>
+                        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/stats/monthly')">Copier</button>
+                        <div class="response"><pre>{
+                "2025-09": { 
+                    "income": 1500, 
+                    "expense": 180 
+                }
+                }</pre>
+        </div>
     </div>
+</div>
+
+<!-- User Profile Update -->
+<h2>Profil Utilisateur (JWT requis)</h2>
+<div class="section-content">
     <div class="route">
-        <span class="method method-GET">GET</span> <code>/api/stats/monthly</code>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/stats/monthly')">Copier</button>
-        <div class="response"><pre>{
-  "2025-09": { "income": 1500, "expense": 180 }
-}</pre></div>
+        <span class="method method-POST">POST</span> <code>/api/update-profile</code> - Mettre à jour le profil
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/update-profile')">Copier</button>
+        <div class="param"><strong>Paramètres:</strong><br>
+            name (string, optionnel), email (string, optionnel), password (string, optionnel), profile_image (file, optionnel)
+        </div>
+        <div class="response">
+            <strong>Réponse exemple:</strong>
+            <pre>{
+                    "success": true,
+                    "message": "Profil mis à jour",
+                    "user": {
+                        "id": 1,
+                        "name": "Nouveau Nom",
+                        "email": "user@mail.com",
+                        "profile_image": "https://moneywise-api-backend.onrender.com/storage/profiles/avatar.png"
+                    }
+                }
+            </pre>
+        </div>
+    </div>
+</div>
+
+<div class="section-content">
+    <div class="route">
+        <span class="method method-POST">POST</span> <code>https://moneywise-api-backend.onrender.com/api</code> - Point d'entrée de l'API et documentation sous forme JSON
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/update-profile')">Copier</button>
     </div>
 </div>
 

@@ -21,10 +21,7 @@ use App\Http\Controllers\Api\StatsController;
 Route::get('/', function () {
     return response()->json([
         'success' => true,
-        'api' => 'MoneyWise API',
-        'version' => '1.0',
-        'message' => 'Bienvenue sur l’API MoneyWise 🚀',
-        'documentation' => url('/'), // ou lien vers ta page de doc si tu en as une
+        'message' => 'Bienvenue sur MoneyWise API',
         'endpoints' => [
             'auth' => [
                 'POST /api/register',
@@ -32,6 +29,7 @@ Route::get('/', function () {
                 'POST /api/logout',
                 'POST /api/refresh',
                 'GET /api/me',
+                'POST /api/update-profile (mise à jour profil + image)',
             ],
             'categories' => [
                 'GET /api/categories',
@@ -49,6 +47,11 @@ Route::get('/', function () {
                 'GET /api/stats/categories',
                 'GET /api/stats/monthly',
             ],
+        ],
+        'notes' => [
+            'L’utilisateur peut mettre à jour son profil via /api/update-profile',
+            'Le champ "profile_image" doit être envoyé en multipart/form-data',
+            'Les images sont stockées dans storage/app/public/profiles et accessibles via /storage/profiles/...'
         ]
     ]);
 });
