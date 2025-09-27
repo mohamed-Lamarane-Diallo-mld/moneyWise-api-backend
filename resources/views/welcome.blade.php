@@ -39,10 +39,9 @@
     h2 {
         color: #2575fc;
         margin-top: 40px;
-        cursor: pointer;
     }
     .section-content {
-        display: none;
+        display: block; /* Tout est ouvert par défaut */
         margin: 10px 0 30px 0;
     }
     .route {
@@ -66,11 +65,16 @@
     .method-POST { background: #2196f3; }
     .method-PUT { background: #ff9800; }
     .method-DELETE { background: #f44336; }
-    code {
+    code, pre {
         background: #f1f2f6;
-        padding: 2px 5px;
+        padding: 5px;
         border-radius: 3px;
         font-family: monospace;
+        overflow-x: auto;
+    }
+    .param, .response {
+        margin-left: 20px;
+        font-size: 0.9rem;
     }
     button.copy-btn {
         margin-left: 10px;
@@ -99,102 +103,163 @@
 </header>
 <main>
 
-<h2 onclick="toggleSection('auth')">Authentication</h2>
-<div id="auth" class="section-content">
+<!-- Authentication -->
+<h2>Authentication</h2>
+<div class="section-content">
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/register</code> - Créer un compte
-        <button class="copy-btn" onclick="copyText('/api/register')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/register')">Copier</button>
+        <div class="param"><strong>Paramètres:</strong><br>fullname, username, email, password</div>
+        <div class="response"><strong>Réponse exemple:</strong><pre>{
+  "success": true,
+  "message": "Utilisateur créé",
+  "data": { "id": 1, "fullname": "Mohamed", "username": "mld" }
+}</pre></div>
     </div>
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/login</code> - Connexion
-        <button class="copy-btn" onclick="copyText('/api/login')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/login')">Copier</button>
+        <div class="param"><strong>Paramètres:</strong><br>email, password</div>
+        <div class="response"><strong>Réponse exemple:</strong><pre>{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+  "token_type": "bearer",
+  "expires_in": 3600
+}</pre></div>
     </div>
 </div>
 
-<h2 onclick="toggleSection('user')">Utilisateur (JWT requis)</h2>
-<div id="user" class="section-content">
+<!-- User -->
+<h2>Utilisateur (JWT requis)</h2>
+<div class="section-content">
     <div class="route">
         <span class="method method-GET">GET</span> <code>/api/me</code>
-        <button class="copy-btn" onclick="copyText('/api/me')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/me')">Copier</button>
+        <div class="response"><pre>{
+  "id": 1,
+  "fullname": "Mohamed",
+  "username": "mld",
+  "email": "mld@example.com"
+}</pre></div>
     </div>
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/logout</code>
-        <button class="copy-btn" onclick="copyText('/api/logout')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/logout')">Copier</button>
+        <div class="response"><pre>{ "message": "Déconnecté" }</pre></div>
     </div>
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/refresh</code>
-        <button class="copy-btn" onclick="copyText('/api/refresh')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/refresh')">Copier</button>
+        <div class="response"><pre>{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+  "token_type": "bearer",
+  "expires_in": 3600
+}</pre></div>
     </div>
 </div>
 
-<h2 onclick="toggleSection('categories')">Catégories (JWT requis)</h2>
-<div id="categories" class="section-content">
+<!-- Categories -->
+<h2>Catégories (JWT requis)</h2>
+<div class="section-content">
     <div class="route">
         <span class="method method-GET">GET</span> <code>/api/categories</code>
-        <button class="copy-btn" onclick="copyText('/api/categories')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories')">Copier</button>
+        <div class="response"><pre>[
+  { "id": 1, "name": "Loisir", "type": "expense", "user_id": 1 }
+]</pre></div>
     </div>
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/categories</code>
-        <button class="copy-btn" onclick="copyText('/api/categories')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories')">Copier</button>
+        <div class="param">name, type (income|expense), user_id</div>
+        <div class="response"><pre>{
+  "id": 2,
+  "name": "Transport",
+  "type": "expense",
+  "user_id": 1
+}</pre></div>
     </div>
     <div class="route">
         <span class="method method-PUT">PUT</span> <code>/api/categories/{id}</code>
-        <button class="copy-btn" onclick="copyText('/api/categories/{id}')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories/{id}')">Copier</button>
+        <div class="param">name, type, user_id</div>
+        <div class="response"><pre>{
+  "id": 2,
+  "name": "Transport Modifié",
+  "type": "expense",
+  "user_id": 1
+}</pre></div>
     </div>
     <div class="route">
         <span class="method method-DELETE">DELETE</span> <code>/api/categories/{id}</code>
-        <button class="copy-btn" onclick="copyText('/api/categories/{id}')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories/{id}')">Copier</button>
+        <div class="response"><pre>{ "message": "Catégorie supprimée" }</pre></div>
     </div>
 </div>
 
-<h2 onclick="toggleSection('transactions')">Transactions (JWT requis)</h2>
-<div id="transactions" class="section-content">
+<!-- Transactions -->
+<h2>Transactions (JWT requis)</h2>
+<div class="section-content">
     <div class="route">
         <span class="method method-GET">GET</span> <code>/api/transactions</code>
-        <button class="copy-btn" onclick="copyText('/api/transactions')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions')">Copier</button>
+        <div class="response"><pre>[
+  { "id": 1, "user_id": 1, "category_id": 2, "title": "Achat transport", "amount": 15.50, "type": "expense", "date": "2025-09-26" }
+]</pre></div>
     </div>
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/transactions</code>
-        <button class="copy-btn" onclick="copyText('/api/transactions')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions')">Copier</button>
+        <div class="param">user_id, category_id, title, amount, type, date</div>
+        <div class="response"><pre>{
+  "id": 2,
+  "user_id": 1,
+  "category_id": 1,
+  "title": "Salaire",
+  "amount": 1500.00,
+  "type": "income",
+  "date": "2025-09-25"
+}</pre></div>
     </div>
     <div class="route">
         <span class="method method-PUT">PUT</span> <code>/api/transactions/{id}</code>
-        <button class="copy-btn" onclick="copyText('/api/transactions/{id}')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions/{id}')">Copier</button>
+        <div class="param">user_id, category_id, title, amount, type, date</div>
+        <div class="response"><pre>{
+  "id": 2,
+  "title": "Salaire Modifié",
+  "amount": 1600.00
+}</pre></div>
     </div>
     <div class="route">
         <span class="method method-DELETE">DELETE</span> <code>/api/transactions/{id}</code>
-        <button class="copy-btn" onclick="copyText('/api/transactions/{id}')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions/{id}')">Copier</button>
+        <div class="response"><pre>{ "message": "Transaction supprimée" }</pre></div>
     </div>
 </div>
 
-<h2 onclick="toggleSection('stats')">Statistiques (JWT requis)</h2>
-<div id="stats" class="section-content">
+<!-- Stats -->
+<h2>Statistiques (JWT requis)</h2>
+<div class="section-content">
     <div class="route">
         <span class="method method-GET">GET</span> <code>/api/stats/categories</code>
-        <button class="copy-btn" onclick="copyText('/api/stats/categories')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/stats/categories')">Copier</button>
+        <div class="response"><pre>{
+  "Loisir": 150,
+  "Transport": 30
+}</pre></div>
     </div>
     <div class="route">
         <span class="method method-GET">GET</span> <code>/api/stats/monthly</code>
-        <button class="copy-btn" onclick="copyText('/api/stats/monthly')">Copier</button>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/stats/monthly')">Copier</button>
+        <div class="response"><pre>{
+  "2025-09": { "income": 1500, "expense": 180 }
+}</pre></div>
     </div>
 </div>
 
-</main>
 <footer>
-    &copy; 2025 MoneyWise API
+    &copy; 2025 MoneyWise API - Tous droits réservés
 </footer>
 
-<script>
-function toggleSection(id) {
-    const section = document.getElementById(id);
-    section.style.display = (section.style.display === "block") ? "none" : "block";
-}
-
-function copyText(text) {
-    navigator.clipboard.writeText("https://moneywise-api-backend.onrender.com/api" + text)
-    .then(() => alert("URL copiée !"))
-    .catch(err => alert("Erreur copie : " + err));
-}
-</script>
 </body>
 </html>
