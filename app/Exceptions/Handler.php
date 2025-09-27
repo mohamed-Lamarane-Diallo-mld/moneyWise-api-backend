@@ -30,35 +30,27 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
-
-         // 404 - Route non trouvée
-        $this->renderable(function (NotFoundHttpException $e, $request) {
-            if ($request->is('api/*')) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Route non trouvée',
-                ], 404);
-            }
-        });
-
-        // 405 - Mauvaise méthode HTTP
-        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
-            if ($request->is('api/*')) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Méthode non autorisée',
-                ], 405);
-            }
-        });
-
-        // 500 - Erreurs internes par défaut
+ // Gestion des erreurs pour les routes API
         $this->renderable(function (Throwable $e, $request) {
             if ($request->is('api/*')) {
+                $status = 500;
+                $message = $e->getMessage() ?: 'Erreur interne du serveur';
+
+                if ($e instanceof NotFoundHttpException) {
+                    $status = 404;
+                    $message = 'Route non trouvée';
+                } elseif ($e instanceof MethodNotAllowedHttpException) {
+                    $status = 405;
+                    $message = 'Méthode non autorisée';
+                }
+
                 return response()->json([
                     'success' => false,
-                    'message' => $e->getMessage() ?: 'Erreur interne du serveur',
-                ], 500);
+                    'message' => $message,
+                    'status' => $status
+                ], $status);
             }
         });
+
     }
 }
