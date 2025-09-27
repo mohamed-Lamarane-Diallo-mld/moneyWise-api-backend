@@ -51,7 +51,7 @@ Route::any('/', function () {
         'notes' => [
             'L’utilisateur peut mettre à jour son profil via /api/update-profile',
             'Le champ "profile_image" doit être envoyé en multipart/form-data',
-            'Les images sont stockées dans storage/app/public/profiles et accessibles via /storage/profiles/...'
+            'Les images sont stockées dans storage/app/public/profiles et accessibles via url/storage/profiles/...'
         ]
     ]);
 });
