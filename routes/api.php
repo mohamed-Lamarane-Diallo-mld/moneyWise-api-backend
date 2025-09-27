@@ -55,6 +55,43 @@ Route::get('/', function () {
         ]
     ]);
 });
+Route::post('/', function () {
+    return response()->json([
+        'success' => true,
+        'message' => 'Bienvenue sur MoneyWise API',
+        'endpoints' => [
+            'auth' => [
+                'POST /api/register',
+                'POST /api/login',
+                'POST /api/logout',
+                'POST /api/refresh',
+                'GET /api/me',
+                'POST /api/update-profile (mise à jour profil + image)',
+            ],
+            'categories' => [
+                'GET /api/categories',
+                'POST /api/categories',
+                'PUT /api/categories/{id}',
+                'DELETE /api/categories/{id}',
+            ],
+            'transactions' => [
+                'GET /api/transactions',
+                'POST /api/transactions',
+                'PUT /api/transactions/{id}',
+                'DELETE /api/transactions/{id}',
+            ],
+            'stats' => [
+                'GET /api/stats/categories',
+                'GET /api/stats/monthly',
+            ],
+        ],
+        'notes' => [
+            'L’utilisateur peut mettre à jour son profil via /api/update-profile',
+            'Le champ "profile_image" doit être envoyé en multipart/form-data',
+            'Les images sont stockées dans storage/app/public/profiles et accessibles via /storage/profiles/...'
+        ]
+    ]);
+});
 
 
 
