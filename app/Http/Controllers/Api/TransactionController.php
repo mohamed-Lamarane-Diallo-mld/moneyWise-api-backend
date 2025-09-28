@@ -11,14 +11,28 @@ use Illuminate\Support\Facades\Auth;
 class TransactionController extends Controller
 {
     // GET /api/transactions
-    public function index()
+    public function index(Request $request)
     {
-        return Auth::user()
+        $query = Auth::user()
             ->transactions()
             ->with('category')
-            ->orderBy('date', 'desc')
-            ->get();
+            ->orderBy('date', 'desc');
+
+        // Vérifier si "limit" est présent dans l’URL
+        if ($request->has('limit')) {
+            $limit = (int) $request->query('limit');
+            $transactions = $query->take($limit)->get();
+        } else {
+            $transactions = $query->get();
+        }
+
+        return response()->json([
+            'success' => true,
+            'count' => $transactions->count(),
+            'transactions' => $transactions
+        ]);
     }
+
 
     // POST /api/transactions
     public function store(Request $request)
