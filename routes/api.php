@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\StatsController;
+use App\Http\Controllers\Api\PasswordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,5 +83,9 @@ Route::middleware('auth:api')->group(function () {
     // Stats
     Route::get('stats/categories', [StatsController::class, 'categories']);
     Route::get('stats/monthly', [StatsController::class, 'monthly']);
+
+    // Password reset routes
+    Route::post('forgot-password', [PasswordResetController::class, 'sendResetLink']);
+    Route::post('reset-password', [PasswordResetController::class, 'resetPassword']);
 
 });
