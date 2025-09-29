@@ -111,91 +111,217 @@
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/register</code> - Créer un compte
         <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/register')">Copier</button>
-        <div class="param"><strong>Paramètres:</strong><br>fullname, username, email, password</div>
-        <div class="response"><strong>Réponse exemple:</strong><pre>{
-  "success": true,
-  "message": "Utilisateur créé",
-  "data": { "id": 1, "fullname": "Mohamed", "username": "mld" }
-}</pre></div>
-    </div>
-    <div class="route">
-        <span class="method method-POST">POST</span> <code>/api/login</code> - Connexion
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/login')">Copier</button>
-        <div class="param"><strong>Paramètres:</strong><br>email, password</div>
-        <div class="response"><strong>Réponse exemple:</strong><pre>{
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-  "token_type": "bearer",
-  "expires_in": 3600
-}</pre></div>
-    </div>
+        <div class="param"><strong>Paramètres:</strong><br>name, email, password</div>
+            <div class="response"><strong>Réponse exemple:</strong>
+                <pre>
+                    {
+                        "name": "lamadialo mld",
+                        "email": "lama1123@example.com",
+                        "password": "122123456"
+                    }
+                </pre>
+            </div>
+        </div>
+        <span class="method method-POST">POST</span> <code>/api/register</code> - Créer un compte
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/register')">Copier</button>
+        <div class="param"><strong>Paramètres:</strong><br>name, email, password</div>
+            <div class="response"><strong>Réponse exemple:</strong>
+                <pre>
+                    {
+                        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+                        "user": {
+                            "name": "lamadiallo mld",
+                            "email": "lamadiallo1123@example.com",
+                            "updated_at": "2025-09-29T07:03:04.000000Z",
+                            "created_at": "2025-09-29T07:03:04.000000Z",
+                            "id": 6
+                        },
+                        "token_type": "bearer",
+                        "expires_in": 3600
+                    }
+                </pre>
+            </div>
+        </div>
 </div>
+<!--  -->
+        <div class="route">
+            <span class="method method-POST">POST</span> <code>/api/login</code> - Connexion
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/login')">Copier</button>
+            <div class="param"><strong>Paramètres:</strong><br>name, email, password</div>
+                <div class="response"><strong>Réponse exemple:</strong>
+                    <pre>
+                        {
+                            "email": "lamadiallo1123@example.com",
+                            "password": "122123456"
+                        }
+                    </pre>
+                </div>
+            </div>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/login')">Copier</button>
+            <div class="param"><strong>Paramètres:</strong><br>email, password</div>
+            <div class="response"><strong>Réponse exemple:</strong>
+            <pre>
+                {
+                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+                    "user": {
+                        "id": 6,
+                        "name": "lamadiallo mld",
+                        "email": "lamadiallo1123@example.com",
+                        "budget": "0.00",
+                        "profile_image": null,
+                        "created_at": "2025-09-29T07:03:04.000000Z",
+                        "updated_at": "2025-09-29T07:03:04.000000Z"
+                    },
+                    "token_type": "bearer",
+                    "expires_in": 3600
+                }
+            </pre>
+        </div>
+    </div>
 
+<
 <!-- User -->
 <h2>Utilisateur (JWT requis)</h2>
 <div class="section-content">
     <div class="route">
         <span class="method method-GET">GET</span> <code>/api/me</code>
         <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/me')">Copier</button>
-        <div class="response"><pre>{
-  "id": 1,
-  "fullname": "Mohamed",
-  "username": "mld",
-  "email": "mld@example.com"
-}</pre></div>
+        <div class="response">
+            <pre>
+                {
+                //
+                }
+            </pre>
+        </div>
+        <span class="method method-GET">GET</span> <code>/api/me</code>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/me')">Copier</button>
+        <div class="response">
+            <pre>
+                {
+                    "id": 1,
+                    "name": "lamadialo mld",
+                    "email": "lama1123@example.com",
+                    "budget": "0.00",
+                    "profile_image": null,
+                    "created_at": "2025-09-27T21:47:06.000000Z",
+                    "updated_at": "2025-09-27T21:47:06.000000Z"
+                }
+            </pre>
+        </div>
     </div>
+    <!--  -->
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/logout</code>
+         <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/logout')">Copier</button>
+        <div class="response">
+            <pre>
+                {
+                //
+                }
+            </pre>
+        </div>
         <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/logout')">Copier</button>
-        <div class="response"><pre>{ "message": "Déconnecté" }</pre></div>
+        <div class="response"><pre>{"message": "Successfully logged out"}</pre></div>
     </div>
+    <!--  -->
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/refresh</code>
+        <span class="method method-POST">NOTE : il faut se loger avant de renouveller votre token</span> 
         <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/refresh')">Copier</button>
-        <div class="response"><pre>{
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-  "token_type": "bearer",
-  "expires_in": 3600
-}</pre></div>
+        <div class="response">
+            <pre>
+                {
+                //
+                }
+            </pre>
+        </div>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/refresh')">Copier</button>
+        <div class="response">
+            <pre>
+                {
+                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+                    "user": {
+                        "id": 1,
+                        "name": "lamadialo mld",
+                        "email": "lama1123@example.com",
+                        "budget": "0.00",
+                        "profile_image": null,
+                        "created_at": "2025-09-27T21:47:06.000000Z",
+                        "updated_at": "2025-09-27T21:47:06.000000Z"
+                    },
+                    "token_type": "bearer",
+                    "expires_in": 3600
+                }
+            </pre>
+        </div>
     </div>
 </div>
 
 <!-- Categories -->
 <h2>Catégories (JWT requis)</h2>
 <div class="section-content">
-    <div class="route">
-        <span class="method method-GET">GET</span> <code>/api/categories</code>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories')">Copier</button>
-        <div class="response"><pre>[
-  { "id": 1, "name": "Loisir", "type": "expense", "user_id": 1 }
-]</pre></div>
-    </div>
-    <div class="route">
-        <span class="method method-POST">POST</span> <code>/api/categories</code>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories')">Copier</button>
-        <div class="param">name, type (income|expense), user_id</div>
-        <div class="response"><pre>{
-  "id": 2,
-  "name": "Transport",
-  "type": "expense",
-  "user_id": 1
-}</pre></div>
-    </div>
-    <div class="route">
-        <span class="method method-PUT">PUT</span> <code>/api/categories/{id}</code>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories/{id}')">Copier</button>
-        <div class="param">name, type, user_id</div>
-        <div class="response"><pre>{
-  "id": 2,
-  "name": "Transport Modifié",
-  "type": "expense",
-  "user_id": 1
-}</pre></div>
-    </div>
-    <div class="route">
-        <span class="method method-DELETE">DELETE</span> <code>/api/categories/{id}</code>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories/{id}')">Copier</button>
-        <div class="response"><pre>{ "message": "Catégorie supprimée" }</pre></div>
-    </div>
+        <div class="route">
+            <span class="method method-GET">GET</span> <code>/api/categories</code> - Obtenir toutes les catégories
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories')">Copier</button>
+            <div class="response">
+                <pre>
+                    [
+                        { 
+                            "id": 1, 
+                            "name": "Loisir", 
+                            "type": "expense", 
+                            "user_id": 1 
+                        }
+                    ]
+                </pre>
+            </div>
+        </div>
+        <div class="route">
+            <span class="method method-POST">POST</span> <code>/api/categories</code> - Créer une catégorie
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories')">Copier</button>
+            <div class="param">name, type (income|expense), user_id</div>
+            <div class="response">
+                <strong>exemple:</strong>
+                <pre>
+                    {
+                        "name": "Loisir",
+                        "type": "expense",
+                        "user_id": 1
+                    }
+                </pre>
+            </div>
+            <div>response</div>
+            <div class="response">
+                <pre>
+                    {
+                        "id": 1,
+                        "name": "Loisir",
+                        "type": "expense",
+                        "user_id": 1
+                    }
+                </pre>
+            </div>
+        </div>
+        <div class="route">
+            <span class="method method-PUT">PUT</span> <code>/api/categories/{id}</code>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories/{id}')">Copier</button>
+            <div class="param">name, type, user_id</div>
+            <div class="response">
+                <pre>
+                    {
+                        "id": 2,
+                        "name": "Transport Modifié",
+                        "type": "expense",
+                        "user_id": 1
+                    }
+                </pre>
+            </div>
+        </div>
+        <div class="route">
+            <span class="method method-DELETE">DELETE</span> <code>/api/categories/{id}</code>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/categories/{id}')">Copier</button>
+            <div class="response"><pre>{ "message": "Catégorie supprimée" }</pre></div>
+        </div>
 </div>
 
 <!-- Transactions -->
@@ -203,34 +329,105 @@
 <div class="section-content">
     <div class="route">
         <span class="method method-GET">GET</span> <code>/api/transactions</code>
+        <span class="method method-GET">Obteension de tout les transaction</span>
         <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions')">Copier</button>
-        <div class="response"><pre>[
-  { "id": 1, "user_id": 1, "category_id": 2, "title": "Achat transport", "amount": 15.50, "type": "expense", "date": "2025-09-26" }
-]</pre></div>
+        <div class="response">
+            <pre>
+                [
+                    { 
+                        "id": 1, 
+                        "user_id": 1, 
+                        "category_id": 1, 
+                        "title": "Achat transport", 
+                        "amount": 15.50, 
+                        "type": "expense", 
+                        "date": "2025-09-26" 
+                    }
+                    .... ici d'autres transactions ...
+                ]
+            </pre>
+        </div>
+        <span class="method method-GET">GET</span> <code>/api/transactions&limit=10</code>
+        <span class="method method-GET">Obteension de tout les transaction avec la variable limit = 10 </span>
+        <span class="method method-GET">NOTE : la variable c'est limit dans l'url </span>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions')">Copier</button>
+        <div class="response">
+            <pre>
+                [
+                    { 
+                        "id": 1, 
+                        "user_id": 1, 
+                        "category_id": 1, 
+                        "title": "Achat transport", 
+                        "amount": 15.50, 
+                        "type": "expense", 
+                        "date": "2025-09-26" 
+                    }
+                    .... ici d'autres transactions jusqu'a limit ...
+                ]
+            </pre>
+        </div>
     </div>
     <div class="route">
-        <span class="method method-POST">POST</span> <code>/api/transactions</code>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions')">Copier</button>
-        <div class="param">user_id, category_id, title, amount, type, date</div>
-        <div class="response"><pre>{
-  "id": 2,
-  "user_id": 1,
-  "category_id": 1,
-  "title": "Salaire",
-  "amount": 1500.00,
-  "type": "income",
-  "date": "2025-09-25"
-}</pre></div>
+            <span class="method method-POST">POST</span> <code>/api/transactions</code> - Créer une transaction
+            
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions')">Copier</button>
+            <div class="param">user_id, category_id, title, amount, type, date</div>
+            <div class="response">
+                <strong>exemple:</strong>
+                <pre>
+                    {
+                        "user_id": 1,
+                        "category_id": 1,
+                        "title": "Salaire",
+                        "amount": 15000.00,
+                        "type": "income",
+                        "date": "2025-09-25"
+                    }
+                </pre>
+            </div>
+            <div>response</div>
+            <div class="response">
+                <pre>
+                    {
+                        "id": 1,
+                        "user_id": 1,
+                        "category_id": 1,
+                        "title": "Salaire",
+                        "amount": 15000.00,
+                        "type": "income",
+                        "date": "2025-09-25"
+                    }
+                </pre>
+            </div>
     </div>
     <div class="route">
-        <span class="method method-PUT">PUT</span> <code>/api/transactions/{id}</code>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions/{id}')">Copier</button>
-        <div class="param">user_id, category_id, title, amount, type, date</div>
-        <div class="response"><pre>{
-  "id": 2,
-  "title": "Salaire Modifié",
-  "amount": 1600.00
-}</pre></div>
+            <span class="method method-PUT">PUT</span> <code>/api/transactions/{id}</code> - Mettre à jour une transaction
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/transactions/{id}')">Copier</button>
+            <div class="param">user_id, category_id, title, amount, type, date</div>
+            <div class="response">
+                <strong>exemple:</strong>
+                <pre>
+                    {
+                        "user_id": 1,
+                        "category_id": 1,
+                        "title": "Salaire Modifié",
+                        "amount": 1600.00,
+                        "type": "income",
+                        "date": "2025-09-25"
+                    }
+                </pre>
+            </div>
+            <div>response</div>
+            <div class="response">
+                <pre>
+                    {
+                    "id": 1,
+                    "title": "Salaire Modifié",
+                    "amount": 1600.00
+                    }
+                </pre>
+            </div>
     </div>
     <div class="route">
         <span class="method method-DELETE">DELETE</span> <code>/api/transactions/{id}</code>
@@ -243,22 +440,29 @@
 <h2>Statistiques (JWT requis)</h2>
 <div class="section-content">
     <div class="route">
-        <span class="method method-GET">GET</span> <code>/api/stats/categories</code>
+        <span class="method method-GET">GET</span> <code>/api/stats/categories</code> - Total par catégorie
         <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/stats/categories')">Copier</button>
-        <div class="response"><pre>{
-                "Loisir": 150,
-                "Transport": 30
-                }</pre></div>
-                    </div>
-                    <div class="route">
-                        <span class="method method-GET">GET</span> <code>/api/stats/monthly</code>
-                        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/stats/monthly')">Copier</button>
-                        <div class="response"><pre>{
-                "2025-09": { 
-                    "income": 1500, 
-                    "expense": 180 
+        <div class="response">
+            <pre>
+                {
+                    "Loisir": 150,
+                    "Transport": 30
                 }
-                }</pre>
+            </pre>
+        </div>
+    </div>
+    <div class="route">
+        <span class="method method-GET">GET</span> <code>/api/stats/monthly</code>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/stats/monthly')">Copier</button>
+        <div class="response">
+            <pre>
+                {
+                    "2025-09": { 
+                        "income": 1500, 
+                        "expense": 180 
+                    }
+                }
+            </pre>
         </div>
     </div>
 </div>
@@ -274,7 +478,8 @@
         </div>
         <div class="response">
             <strong>Réponse exemple:</strong>
-            <pre>{
+            <pre>
+                {
                     "success": true,
                     "message": "Profil mis à jour",
                     "user": {
