@@ -63,6 +63,9 @@ Route::any('/', function () {
 // Routes publiques
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+ // Password reset routes
+Route::post('forgot-password', [PasswordResetController::class, 'sendResetLink']);
+Route::post('reset-password', [PasswordResetController::class, 'resetPassword']);
 
 // Routes protégées par JWT
 Route::middleware('auth:api')->group(function () {
@@ -88,8 +91,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('stats/categories', [StatsController::class, 'categories']);
     Route::get('stats/monthly', [StatsController::class, 'monthly']);
 
-    // Password reset routes
-    Route::post('forgot-password', [PasswordResetController::class, 'sendResetLink']);
-    Route::post('reset-password', [PasswordResetController::class, 'resetPassword']);
 
 });
