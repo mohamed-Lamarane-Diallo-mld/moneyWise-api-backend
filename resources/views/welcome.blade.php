@@ -108,78 +108,57 @@
 <!-- Authentication -->
 <h2>Authentication</h2>
 <div class="section-content">
+
+    <!-- Register -->
     <div class="route">
         <span class="method method-POST">POST</span> <code>/api/register</code> - Créer un compte
         <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/register')">Copier</button>
         <div class="param"><strong>Paramètres:</strong><br>name, email, password</div>
-            <div class="response"><strong>Réponse exemple:</strong>
-                <pre>
-                    {
-                        "name": "lamadialo mld",
-                        "email": "lama1123@example.com",
-                        "password": "122123456"
-                    }
-                </pre>
-            </div>
-        </div>
-        <span class="method method-POST">POST</span> <code>/api/register</code> - Créer un compte
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/register')">Copier</button>
-        <div class="param"><strong>Paramètres:</strong><br>name, email, password</div>
-            <div class="response"><strong>Réponse exemple:</strong>
-                <pre>
-                    {
-                        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-                        "user": {
-                            "name": "lamadiallo mld",
-                            "email": "lamadiallo1123@example.com",
-                            "updated_at": "2025-09-29T07:03:04.000000Z",
-                            "created_at": "2025-09-29T07:03:04.000000Z",
-                            "id": 6
-                        },
-                        "token_type": "bearer",
-                        "expires_in": 3600
-                    }
-                </pre>
-            </div>
-        </div>
-</div>
-<!--  -->
-        <div class="route">
-            <span class="method method-POST">POST</span> <code>/api/login</code> - Connexion
-            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/login')">Copier</button>
-            <div class="param"><strong>Paramètres:</strong><br>name, email, password</div>
-                <div class="response"><strong>Réponse exemple:</strong>
-                    <pre>
-                        {
-                            "email": "lamadiallo1123@example.com",
-                            "password": "122123456"
-                        }
-                    </pre>
-                </div>
-            </div>
-            <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/login')">Copier</button>
-            <div class="param"><strong>Paramètres:</strong><br>email, password</div>
-            <div class="response"><strong>Réponse exemple:</strong>
+        <div class="response"><strong>Réponse exemple:</strong>
             <pre>
-                {
-                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-                    "user": {
-                        "id": 6,
-                        "name": "lamadiallo mld",
-                        "email": "lamadiallo1123@example.com",
-                        "budget": "0.00",
-                        "profile_image": null,
-                        "created_at": "2025-09-29T07:03:04.000000Z",
-                        "updated_at": "2025-09-29T07:03:04.000000Z"
-                    },
-                    "token_type": "bearer",
-                    "expires_in": 3600
-                }
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "user": {
+        "id": 6,
+        "name": "lamadiallo mld",
+        "email": "lama1123@example.com",
+        "updated_at": "2025-09-29T07:03:04.000000Z",
+        "created_at": "2025-09-29T07:03:04.000000Z"
+    },
+    "token_type": "bearer",
+    "expires_in": 3600
+}
             </pre>
         </div>
     </div>
 
-<
+    <!-- Login -->
+    <div class="route">
+        <span class="method method-POST">POST</span> <code>/api/login</code> - Connexion
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/login')">Copier</button>
+        <div class="param"><strong>Paramètres:</strong><br>email, password</div>
+        <div class="response"><strong>Réponse exemple:</strong>
+            <pre>
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "user": {
+        "id": 6,
+        "name": "lamadiallo mld",
+        "email": "lama1123@example.com",
+        "budget": "0.00",
+        "profile_image": null,
+        "created_at": "2025-09-29T07:03:04.000000Z",
+        "updated_at": "2025-09-29T07:03:04.000000Z"
+    },
+    "token_type": "bearer",
+    "expires_in": 3600
+}
+            </pre>
+        </div>
+    </div>
+
+</div>
+
 <!-- User -->
 <h2>Utilisateur (JWT requis)</h2>
 <div class="section-content">
@@ -493,6 +472,80 @@
         </div>
     </div>
 </div>
+
+<!-- API Root -->
+ <!-- Password Reset -->
+<h2>Réinitialisation du mot de passe</h2>
+<div class="section-content">
+
+    <!-- 1. Demande de réinitialisation -->
+    <div class="route">
+        <span class="method method-POST">POST</span> <code>/api/forgot-password</code> - Demande de réinitialisation du mot de passe
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/forgot-password')">Copier</button>
+        <div class="param"><strong>Paramètres:</strong><br>
+            email (string, obligatoire)
+        </div>
+        <div class="response">
+            <strong>Exemple de requête:</strong>
+            <pre>
+{
+    "email": "lama1123@example.com"
+}
+            </pre>
+            <strong>Exemple de réponse (succès):</strong>
+            <pre>
+{
+    "success": true,
+    "message": "Email envoyé avec succès !"
+}
+            </pre>
+            <p>Le lien envoyé dans l'email pointera vers le front-end :</p>
+            <pre>
+https://moneywise-frontend.vercel.app/auth/password_reset?token=xxxxxx&email=lama1123@example.com
+            </pre>
+        </div>
+    </div>
+
+    <!-- 2. Réinitialisation avec token -->
+    <div class="route">
+        <span class="method method-POST">POST</span> <code>/api/reset-password</code> - Réinitialisation du mot de passe
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('/api/reset-password')">Copier</button>
+        <div class="param"><strong>Paramètres:</strong><br>
+            email (string, obligatoire)<br>
+            token (string, obligatoire)<br>
+            password (string, obligatoire)<br>
+            password_confirmation (string, obligatoire)
+        </div>
+        <div class="response">
+            <strong>Exemple de requête:</strong>
+            <pre>
+{
+    "email": "lama1123@example.com",
+    "token": "xxxxxx",
+    "password": "nouveauPassword123",
+    "password_confirmation": "nouveauPassword123"
+}
+            </pre>
+            <strong>Exemple de réponse (succès):</strong>
+            <pre>
+{
+    "success": true,
+    "message": "Mot de passe réinitialisé avec succès !"
+}
+            </pre>
+            <strong>Exemple de réponse (token invalide):</strong>
+            <pre>
+{
+    "success": false,
+    "message": "Token invalide",
+    "status": 400
+}
+            </pre>
+        </div>
+    </div>
+
+</div>
+
 
 <div class="section-content">
     <div class="route">
