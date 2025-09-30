@@ -28,9 +28,12 @@ class PasswordResetController extends Controller
             ]
         );
 
-        // Envoi du mail
-        $url = config('app.url') . "/api/reset-password?token=$token&email={$request->email}";
+        // URL du front pour la réinitialisation
+        $frontendUrl = 'https://moneywise-frontend.vercel.app/auth/password_reset';
+        $url = $frontendUrl . "?token=$token&email={$request->email}";
 
+        // Envoi du mail
+        
         Mail::raw("Voici votre lien pour réinitialiser le mot de passe : $url", function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Réinitialisation de mot de passe');
