@@ -48,6 +48,10 @@ Route::any('/', function () {
                 'GET /api/stats/categories',
                 'GET /api/stats/monthly',
             ],
+            'password reset' => [
+                'POST /api/forgot-password',
+                'POST /api/reset-password',
+            ]
         ],
         'notes' => [
             'L’utilisateur peut mettre à jour son profil via /api/update-profile',
