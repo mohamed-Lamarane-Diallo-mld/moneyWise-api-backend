@@ -29,13 +29,13 @@ class PasswordResetController extends Controller
         );
 
         // Envoi du mail
-        Mail::raw("Voici votre lien pour réinitialiser le mot de passe : " .
-            url("/api/reset-password?token=$token&email={$request->email}"),
-            function ($message) use ($request) {
-                $message->to($request->email);
-                $message->subject('Réinitialisation de mot de passe');
-            }
-        );
+        $url = config('app.url') . "/api/reset-password?token=$token&email={$request->email}";
+
+        Mail::raw("Voici votre lien pour réinitialiser le mot de passe : $url", function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject('Réinitialisation de mot de passe');
+        });
+
 
         return response()->json(['message' => 'Email envoyé avec succès !']);
     }
