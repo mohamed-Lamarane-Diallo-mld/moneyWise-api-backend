@@ -43,17 +43,17 @@ class PasswordResetController extends Controller
         Mail::send([], [], function ($message) use ($request, $url) {
             $message->to($request->email)
                 ->subject('Réinitialisation du mot de passe')
-                ->setBody(
+                ->html(
                     "<p>Vous avez demandé une réinitialisation de mot de passe.</p>
-                     <p>Cliquez sur le bouton ci-dessous pour créer un nouveau mot de passe :</p>
-                     <a href='$url' style='display:inline-block;padding:10px 20px;background:#1d4ed8;color:white;text-decoration:none;border-radius:5px;'>Réinitialiser le mot de passe</a>
-                     <p>Si vous n'avez pas demandé cette action, ignorez cet email.</p>",
-                    'text/html'
+                    <p>Cliquez sur le bouton ci-dessous pour créer un nouveau mot de passe :</p>
+                    <a href='$url' style='display:inline-block;padding:10px 20px;background:#1d4ed8;color:white;text-decoration:none;border-radius:5px;'>Réinitialiser le mot de passe</a>
+                    <p>Si vous n'avez pas demandé cette action, ignorez cet email.</p>"
                 );
         });
 
         return response()->json(['message' => 'Email envoyé avec succès !']);
     }
+
 
     // Réinitialisation du mot de passe avec token
     public function resetPassword(Request $request)
