@@ -523,7 +523,6 @@ https://moneywise-frontend.vercel.app/auth/password_reset?token=xxxxxx&email=lam
     "email": "lama1123@example.com",
     "token": "xxxxxx",
     "password": "nouveauPassword123",
-    "password_confirmation": "nouveauPassword123"
 }
             </pre>
             <strong>Exemple de réponse (succès):</strong>
