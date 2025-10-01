@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 
 class Transaction extends Model
 {
@@ -12,6 +14,7 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'category_id',
+        'title',
         'amount',
         'type',
         'description',
@@ -20,7 +23,7 @@ class Transaction extends Model
 
     protected $casts = [
         'amount' => 'float',
-        'date' => 'date',
+        'date' => 'datetime',
     ];
 
     public function user()
@@ -33,7 +36,6 @@ class Transaction extends Model
         return $this->belongsTo(Category::class);
     }
 
-    // Helpers
     public function isIncome()
     {
         return $this->type === 'income';
@@ -44,9 +46,18 @@ class Transaction extends Model
         return $this->type === 'expense';
     }
 
-    // Scope
     public function scopeForUser($query, $userId)
     {
         return $query->where('user_id', $userId);
+    }
+
+  // date 
+    protected function date(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value
+                ? Carbon::parse($value)->locale('fr')->translatedFormat('d F Y')
+                : null
+        );
     }
 }

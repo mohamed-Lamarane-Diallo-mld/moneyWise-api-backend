@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id')->nullable(); // clé étrangère vers categories
+            $table->string('title');
             $table->decimal('amount', 15, 2);
             $table->enum('type', ['income', 'expense']); // type de transaction
             $table->text('description')->nullable();
