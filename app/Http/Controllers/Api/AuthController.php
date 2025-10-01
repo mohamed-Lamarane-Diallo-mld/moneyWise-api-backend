@@ -60,7 +60,17 @@ class AuthController extends Controller
     // Profil utilisateur
     public function me()
     {
-        return response()->json(Auth::guard('api')->user());
+        $user = Auth::guard('api')->user();
+
+        // Ajouter l'URL complète de l'image
+        $user->profile_image_url = $user->profile_image 
+            ? asset('storage/' . $user->profile_image)
+            : asset('storage/profiles/default.png'); // image par défaut si vide
+
+        return response()->json([
+            'success' => true,
+            'user' => $user
+        ]);
     }
 
     // Mettre à jour le profil utilisateur
@@ -87,13 +97,17 @@ class AuthController extends Controller
 
         // Upload image
         if ($request->hasFile('profile_image')) {
-            // supprimer l’ancienne si existe
-            if ($user->profile_image && Storage::exists($user->profile_image)) {
-                Storage::delete($user->profile_image);
+            if ($user->profile_image && Storage::disk('public')->exists($user->profile_image)) {
+                Storage::disk('public')->delete($user->profile_image);
             }
             $path = $request->file('profile_image')->store('profiles', 'public');
             $user->profile_image = $path;
         }
+
+        // Ajouter l'URL complète pour le frontend
+        $user->profile_image_url = $user->profile_image
+            ? asset('storage/' . $user->profile_image)
+            : asset('storage/profiles/default.png');
 
         $user->save();
 
