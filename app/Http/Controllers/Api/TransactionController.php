@@ -42,7 +42,7 @@ class TransactionController extends Controller
             'title' => 'required|string',
             'amount' => 'required|numeric',
             'type' => 'required|in:income,expense',
-            'date' => 'required|date',
+            'date' => 'required|string',
             'description' => 'nullable|string',
             'category_name' => 'required|string',
         ]);
