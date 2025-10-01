@@ -47,6 +47,9 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::guard('api')->logout();
+        if (Auth::guard('api')->check()) {
+            return response()->json(['error' => 'Failed to log out'], 500);
+        }
         return response()->json(['message' => 'Successfully logged out']);
     }
 
