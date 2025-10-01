@@ -72,7 +72,7 @@ Route::middleware('auth:api')->group(function () {
     // User info
     Route::get('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('refresh', [AuthController::class, 'refresh']); 
     Route::post('update-profile', [AuthController::class, 'updateProfile']);
 
     // Categories
@@ -88,8 +88,8 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('transactions/{transaction}', [TransactionController::class, 'destroy']);
 
     // Stats
-    Route::get('stats/categories', [StatsController::class, 'categories']);
-    Route::get('stats/monthly', [StatsController::class, 'monthly']);
-
+    Route::get('/stats/categories', [StatsController::class, 'categories']);
+    Route::get('/stats/monthly', [StatsController::class, 'monthly']);
+    Route::get('/stats/summary', [StatsController::class, 'summary']);
 
 });

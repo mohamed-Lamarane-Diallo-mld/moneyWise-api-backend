@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,40 +11,30 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
         'profile_image',
+        'budget',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'budget' => 'float',
     ];
 
-    // Relation : un utilisateur peut avoir plusieurs catégories
+    // Relations
     public function categories()
     {
         return $this->hasMany(Category::class);
@@ -54,6 +43,19 @@ class User extends Authenticatable implements JWTSubject
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    // Helpers budget
+    public function addToBudget($amount)
+    {
+        $this->budget += $amount;
+        $this->save();
+    }
+
+    public function subtractFromBudget($amount)
+    {
+        $this->budget -= $amount;
+        $this->save();
     }
 
     // Implémentation JWT

@@ -13,6 +13,11 @@ class Category extends Model
         'type',
         'user_id',
     ];
+    protected $casts = [
+    'type' => 'string',
+    ];
+
+    protected $with = ['transactions'];
 
     public function user()
     {
@@ -23,4 +28,12 @@ class Category extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+    public function isIncome(): bool {
+    return $this->type === 'income';
+    }
+
+    public function isExpense(): bool {
+        return $this->type === 'expense';
+    }
+
 }
