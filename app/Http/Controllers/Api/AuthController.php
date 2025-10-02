@@ -65,19 +65,20 @@ class AuthController extends Controller
     {
         $user = Auth::guard('api')->user();
 
-        // Ajouter l'URL complète de l'image
-        $user->profile_image_url = $user->profile_image 
+        // On ajoute le champ profile_image_url
+        $user->profile_image_url = $user->profile_image
             ? asset('storage/' . $user->profile_image)
-            : asset('storage/profiles/default.png'); // image par défaut si vide
+            : asset('storage/profiles/default.png');
 
         return response()->json([
             'success' => true,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
+
     // Mettre à jour le profil utilisateur
-    public function updateProfile(Request $request)
+   public function updateProfile(Request $request)
     {
         $user = Auth::guard('api')->user();
 
@@ -98,7 +99,7 @@ class AuthController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        // Upload image
+        // Upload image si envoyée
         if ($request->hasFile('profile_image')) {
             if ($user->profile_image && Storage::disk('public')->exists($user->profile_image)) {
                 Storage::disk('public')->delete($user->profile_image);
@@ -107,19 +108,22 @@ class AuthController extends Controller
             $user->profile_image = $path;
         }
 
-        // Ajouter l'URL complète pour le frontend
+        // On sauvegarde le user
+        $user->save();
+
+        // On génère l'URL pour le frontend (mais on ne sauvegarde pas dans la DB)
         $user->profile_image_url = $user->profile_image
             ? asset('storage/' . $user->profile_image)
             : asset('storage/profiles/default.png');
 
-        $user->save();
-
+            
         return response()->json([
             'success' => true,
             'message' => 'Profil mis à jour avec succès',
             'user' => $user,
         ]);
     }
+
 
     // Réponse standardisée
     protected function respondWithToken($token, $user)
