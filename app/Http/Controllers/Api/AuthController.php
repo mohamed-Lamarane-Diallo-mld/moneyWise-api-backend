@@ -65,6 +65,10 @@ class AuthController extends Controller
     {
         $user = Auth::guard('api')->user();
 
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
         // On ajoute le champ profile_image_url
         $user->profile_image_url = $user->profile_image
             ? asset('storage/' . $user->profile_image)
