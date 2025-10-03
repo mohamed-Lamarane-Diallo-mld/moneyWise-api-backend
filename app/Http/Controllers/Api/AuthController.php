@@ -86,7 +86,7 @@ class AuthController extends Controller
     {
         $user = Auth::guard('api')->user();
 
-        $request->validate([
+         $request->validate([
             'name' => 'sometimes|string|max:255|unique:users,name,' . $user->id,
             'email' => 'sometimes|email|max:255|unique:users,email,' . $user->id,
             'password' => 'sometimes|string|min:6',
@@ -97,7 +97,10 @@ class AuthController extends Controller
             $user->name = $request->name;
         }
         if ($request->has('email')) {
-            $user->email = $request->email;
+             // Only update email if it's different
+            if ($user->email !== $request->email) {
+                $user->email = $request->email;
+            }
         }
         if ($request->has('password')) {
             $user->password = Hash::make($request->password);
@@ -140,4 +143,3 @@ class AuthController extends Controller
         ]);
     }
 }
-
